@@ -2,7 +2,7 @@
     <div class="link row clearfix">
       <h2>
         <%= link_to link.title, link.url %><br>
-        <small class="author">Submitted <%= time_ago_in_words(link.created_at) %> by <%= link.user.email %></small>
+        <small class="author">Submitted <%= time_ago_in_words(link.created_at) %> by <%= link.user.username %></small>
       </h2>
     </div>
 
@@ -27,7 +27,7 @@
         <% end %>
         <%= link_to 'Comment', link, class: "btn btn-default btn-sm" %>
         <%= link_to hide_link_path(link), method: :put, class: "btn btn-default btn-sm" do %>
-          Hide
+          Read
         <% end %>
       </div>
 <% end %>

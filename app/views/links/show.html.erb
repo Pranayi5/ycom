@@ -4,3 +4,13 @@
 <div class="btn-group">
   <%= link_to 'Visit URL', @link.url, class: "btn btn-primary" %>
 </div>
+<br>
+<br>
+<%= form_for [@link, Comment.new] do |f| %>
+    <%= f.text_area :body, placeholder: "Add a comment" %><br/>
+    <%= f.submit "Add Comment" %>
+<% end %>
+
+<ul>
+  <%= render(partial: 'comments/comment', collection: @link.comments) %>
+</ul>
