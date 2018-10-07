@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181006212731) do
+ActiveRecord::Schema.define(version: 20181007183711) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
@@ -21,6 +24,13 @@ ActiveRecord::Schema.define(version: 20181006212731) do
     t.integer "user_id"
   end
 
+  create_table "deleted_user_news_articles", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "news_article_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "links", force: :cascade do |t|
     t.string "title"
     t.string "url"
@@ -29,6 +39,18 @@ ActiveRecord::Schema.define(version: 20181006212731) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.index ["user_id"], name: "index_links_on_user_id"
+  end
+
+  create_table "news_articles", force: :cascade do |t|
+    t.integer "ycom_item_id"
+    t.string "title", null: false
+    t.string "external_url", null: false
+    t.string "ycom_url", null: false
+    t.integer "comments_count", default: 0, null: false
+    t.string "votes_count", default: "0", null: false
+    t.datetime "posted_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,7 +66,7 @@ ActiveRecord::Schema.define(version: 20181006212731) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "votes", force: :cascade do |t|
+  create_table "votes", id: :serial, force: :cascade do |t|
     t.string "votable_type"
     t.integer "votable_id"
     t.string "voter_type"

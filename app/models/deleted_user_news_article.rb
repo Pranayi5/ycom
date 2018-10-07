@@ -1,0 +1,2 @@
+class DeletedUserNewsArticle < ApplicationRecord
+end
