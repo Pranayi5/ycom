@@ -5,7 +5,7 @@ class LinksController < ApplicationController
   # GET /links
   # GET /links.json
   def index
-    @links = Link.where(hide: false)
+    @links = Link.where(hide: false).paginate(:page => params[:page], :per_page => 15).order('id DESC')
   end
 
   # GET /links/1

@@ -1,33 +1,36 @@
+<% will_paginate @links %>
 <% @links.each do |link| %>
     <div class="link row clearfix">
-      <h2>
-        <%= link_to link.title, link.url %><br>
-        <small class="author">Submitted <%= time_ago_in_words(link.created_at) %> by <%= link.user.username %></small>
+      <h2 style="margin: 0px;">
+       <div class="title-link"> <%= link_to link.title, link.url %></div><br>
+        <small class="author"><p class="index-author">Submitted <%= time_ago_in_words(link.created_at) %> ago by <%= link.user.username %></p></small>
       </h2>
     </div>
 
       <div class="btn-group">
         <a class="btn btn-default btn-sm" href="<%= link.url %>">Visit Link</a>
-        <% if current_user.voted_for? link %>
-        <%= link_to unlike_link_path(link), method: :put, class: "btn btn-default btn-sm" do %>
-            <span class="glyphicon glyphicon-chevron-down"></span>
-            Downvote
-            <%= link.get_upvotes.size %>
+        <% if user_signed_in? %>
+            <% if current_user.voted_for? link %>
+            <%= link_to unlike_link_path(link), method: :put, class: "btn btn-default btn-sm" do %>
+                <span class="glyphicon glyphicon-chevron-down"></span>
+                Downvote
+                <%= link.get_upvotes.size %>
+            <% end %>
+                <%else%>
+            <%= link_to like_link_path(link), method: :put, class: "btn btn-default btn-sm" do %>
+                <span class="glyphicon glyphicon-chevron-up"></span>
+                Upvote
+                <%= link.get_upvotes.size %>
+            <% end %>
+          <% end %>
         <% end %>
-            <%else%>
-        <%= link_to like_link_path(link), method: :put, class: "btn btn-default btn-sm" do %>
-            <span class="glyphicon glyphicon-chevron-up"></span>
-            Upvote
-            <%= link.get_upvotes.size %>
-        <% end %>
-      <% end %>
         <% if link.user == current_user %>
               <%= link_to 'Edit', edit_link_path(link), class: "btn btn-default btn-sm" %>
               <%= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-sm" %>
+              <%= link_to hide_link_path(link), method: :put, class: "btn btn-default btn-sm" do %>
+                  Read/hide
+              <% end %>
         <% end %>
-        <%= link_to 'Comment', link, class: "btn btn-default btn-sm" %>
-        <%= link_to hide_link_path(link), method: :put, class: "btn btn-default btn-sm" do %>
-          Read
-        <% end %>
+        <%= link_to "Comments #{link.comments.count}", link, class: "btn btn-default btn-sm"%>
       </div>
 <% end %>

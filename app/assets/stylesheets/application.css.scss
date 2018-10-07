@@ -17,8 +17,8 @@
 @import "bootstrap";
 
 #logo {
-  font-size: 26px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: -1px;
   padding: 15px 0;
@@ -30,15 +30,22 @@
   #content {
     float: none;
   }
-  padding-bottom: 100px;
+  padding-bottom: 60px;
   .link {
-    padding: 2em 1em;
+    padding: 1em 1em;
     border-bottom: 1px solid #e9e9e9;
     .title {
       a {
         color: #FF4500;
+        font-size: 20px;
       }
     }
+  }
+  .index-author{
+    font-size:68%;
+  }
+  .title-link{
+    font-size: 20px;
   }
   .comments_title {
     margin-top: 2em;
