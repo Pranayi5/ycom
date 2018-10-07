@@ -31,9 +31,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
-gem 'acts_as_votable', '~> 0.11.1'
+
 gem 'will_paginate', '~> 3.1.0'
-gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
