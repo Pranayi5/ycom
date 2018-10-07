@@ -77,6 +77,8 @@ namespace :ycom do
     pages_to_crawl = [1,2,3]
 
     pages_to_crawl.each do |page_no|
+      p "-----------------------------"
+      p "crawling page no: #{page_no}"
       crawl_url(base_url + page_no.to_s)
     end
 

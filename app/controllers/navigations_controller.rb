@@ -1,12 +1,10 @@
 class NavigationsController < ApplicationController
   before_action :authenticate_user!
+  PER_PAGE_SIZE = 30
 
   def index
-    @deleted_articles_info = DeletedUserNewsArticle.where(user_id: current_user.id)
-    deleted_article_ids = @deleted_articles_info.pluck(:news_article_id)
-    @news_articles =  NewsArticle.where.not(id: deleted_article_ids )
-                          .paginate(:page => params[:page], :per_page => 30)
-                           .order('posted_on DESC')
+    deleted_article_ids = DeletedUserNewsArticle.get_deleted_article_info_by_user(current_user.id)
+    @news_articles =  NewsArticle.get_article_for_user_ordered_by_posted_on(deleted_article_ids, PER_PAGE_SIZE, params[:page])
 
 
   end
