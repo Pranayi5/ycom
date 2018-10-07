@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   acts_as_voter
 
-  after_create :fill_fake_data
+  #after_create :fill_fake_data
 
   def fill_fake_data
     require 'faker'

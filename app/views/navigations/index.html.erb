@@ -1,0 +1,21 @@
+<%= will_paginate @news_articles %>
+<% @news_articles.each do |link| %>
+    <div class="link row clearfix">
+      <h2 style="margin: 0px;">
+        <div class="title-link"> <%= link_to link.title, link.external_url %></div><br>
+        <small class="author"><p class="index-author">Submitted <%= time_ago_in_words(link.posted_on) %></p></small>
+      </h2>
+    </div>
+
+    <div class="btn-group">
+      <a class="btn btn-default btn-sm" href="<%= link.external_url %>">Visit Link</a>
+      <a class="btn btn-default btn-sm" href="<%= link.ycom_url %>">Visit Ycom Link</a>
+      <% if user_signed_in? %>
+          <%= link_to hide_article_path(article_id: link.id), method: :put, class: "btn btn-default btn-sm" do %>
+             Delete
+          <% end %>
+      <% end %>
+      <%= link_to "Comments #{link.comments_count}", link.ycom_url, class: "btn btn-default btn-sm"%>
+      <label class="btn btn-default btn-sm">votes <%= link.votes_count %></label>
+    </div>
+<% end %>
