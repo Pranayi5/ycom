@@ -19,5 +19,7 @@
 
 /node_modules
 /yarn-error.log
+# ignore jetbrains rubymine ide generated files
+.idea/*
 
 .byebug_history
